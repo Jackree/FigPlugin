@@ -1,0 +1,125 @@
+<style>
+  *,
+  *::before,
+  *::after {
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    padding: 25px;
+    font-family: "Noto Sans", sans-serif;
+  }
+
+  h1 {
+    margin-bottom: 10px;
+    font-size: 25px;
+    font-weight: 400;
+    line-height: 25px;
+    color: #000000;
+  }
+
+  p {
+    font-size: 25px;
+    font-weight: 400;
+    line-height: 25px;
+    color: #000000;
+  }
+
+  .section {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .last {
+    margin-top: 25px;
+    font-size: 12px;
+    line-height: 100%;
+  }
+
+  .num {
+    opacity: 0.5;
+  }
+
+  .percent {
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .percent-num {
+    font-weight: 700;
+  }
+
+  .light {
+    display: flex;
+    height: 30px;
+    margin-bottom: 8px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+    background-color: #FA7676;
+    font-size: 15px;
+    line-height: 15px;
+  }
+</style>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
+
+<body>
+  <h1>Родитель</h1>
+  <div class="section">
+    <p class="size">W <span class="num" id="parentWidth">0</span></p>
+    <p class="size">H <span class="num" id="parentHeight">0</span></p>
+  </div>
+  <h1>Объект</h1>
+  <div class="section">
+    <p class="size">W <span class="num" id="nodeWidth">0</span></p>
+    <p class="size">H <span class="num" id="nodeHeight">0</span></p>
+  </div>
+  <p class="percent">Процент: <span class="percent-num" id="percent"></span></p>
+  <p class="first light">БАДЫ</p>
+  <p class="second light">Противопоказания</p>
+  <p class="last">
+    Бады - больше 10%<br>
+    Имеются противопоказания - больше 5%
+  </p>
+</body>
+
+<script>
+
+
+  onmessage = (e) => {
+    const nodeWidthSpan = document.querySelector("#nodeWidth");
+    const parentWidthSpan = document.querySelector("#parentWidth");
+    const nodeHeightSpan = document.querySelector("#nodeHeight");
+    const parentHeightSpan = document.querySelector("#parentHeight");
+    const percentSpan = document.querySelector("#percent");
+    const first = document.querySelector(".first");
+    const second = document.querySelector(".second");
+
+    const data = e.data.pluginMessage;
+    console.log(data);
+
+    nodeWidthSpan.innerHTML = data.nodeWidth.toFixed(2);
+    parentWidthSpan.innerHTML = data.parentWidth.toFixed(2);
+    nodeHeightSpan.innerHTML = data.nodeHeight.toFixed(2);
+    parentHeightSpan.innerHTML = data.parentHeight.toFixed(2);
+    percentSpan.innerHTML = data.percent.toFixed(2) + '%';
+
+    if (data.percent > 10) {
+      first.style.backgroundColor = '#76FA83';
+    } else {
+      first.style.backgroundColor = '#FA7676';
+    }
+
+    if (data.percent > 5) {
+      second.style.backgroundColor = '#76FA83';
+    } else {
+      second.style.backgroundColor = '#FA7676';
+    }
+  }
+</script>

@@ -1,0 +1,19 @@
+{
+  "name": "getPercent",
+  "id": "1243635686843165633",
+  "api": "1.0.0",
+  "main": "code.js",
+  "capabilities": [],
+  "enableProposedApi": false,
+  "editorType": [
+    "figma"
+  ],
+  "ui": "ui.html",
+  "enablePrivatePluginApi": true,
+  "networkAccess": {
+    "allowedDomains": [
+      "fonts.googleapis.com",
+      "fonts.gstatic.com"
+    ]
+  }
+}
